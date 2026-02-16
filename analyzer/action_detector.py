@@ -138,10 +138,10 @@ class ActionDetector:
         # Rearrange to (1, C, T, H, W) for model input
         clip_cthw = resized.permute(1, 0, 2, 3).unsqueeze(0)  # (1, C, T, H, W)
 
-        # Split into slow (4 frames) and fast (32 frames) pathways
+        # Split into slow (8 frames) and fast (32 frames) pathways
+        # SlowFast R50 detection uses alpha=4: slow=T/4, fast=T
         num_frames = clip_cthw.shape[2]
-        # Slow pathway: sample every 8th frame (alpha=8) → T/8 frames
-        slow_idx = torch.linspace(0, num_frames - 1, num_frames // 8).long()
+        slow_idx = torch.linspace(0, num_frames - 1, num_frames // 4).long()
         fast_idx = torch.arange(num_frames)
 
         slow = clip_cthw[:, :, slow_idx].to(self.device)
