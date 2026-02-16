@@ -1,0 +1,14 @@
+[project]
+name = "pythonproject"
+version = "0.1.0"
+description = "Add your description here"
+requires-python = ">=3.12"
+dependencies = [
+    "opencv-python>=4.8",
+    "ultralytics>=8.0",
+    "torch>=2.0",
+    "torchvision>=0.15",
+    "pytorchvideo>=0.1.5",
+    "transformers>=4.40",
+    "accelerate>=0.27",
+]
